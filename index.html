@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Comunidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ====== COLORES INSTITUCIONALES UNL ====== */
+        :root {
+            --unl-rojo: #BF0811;
+            --unl-rojo-claro: #D63333;
+            --unl-verde: #488E3A;
+            --unl-verde-claro: #5AA84A;
+            --unl-negro: #211915;
+            --unl-azul: #004C7B;
+            --unl-verde-oliva: #648F39;
+            --unl-dorado: #C8A415;
+            --unl-fondo: #F5F0E8;
+            --unl-fondo-claro: #FAF8F3;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--unl-fondo) 0%, #E8E0D0 25%, var(--unl-fondo-claro) 50%, #E8E0D0 75%, var(--unl-fondo) 100%);
+            color: var(--unl-negro);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ====== ENCABEZADO INSTITUCIONAL ====== */
+        .institutional-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            background: var(--unl-azul);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 3px solid var(--unl-rojo);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .header-logo {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .header-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .header-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .header-subtitle {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.5px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header-logo-right {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* ====== NAVBAR ====== */
+        .navbar {
+            position: fixed;
+            top: 85px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.5rem 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--unl-rojo);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar.scrolled {
+            padding: 0.3rem 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            position: relative;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFFFFF;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #FFFFFF;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ====== PARTICLES CANVAS ====== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ====== SECTIONS ====== */
+        section {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: 10rem 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ====== INICIO ====== */
+        #inicio {
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--unl-negro) 0%, var(--unl-rojo) 50%, var(--unl-verde) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #4a4a4a;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--unl-rojo) 0%, #8B0000 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(191, 8, 17, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(191, 8, 17, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--unl-negro);
+            border: 2px solid var(--unl-verde);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--unl-rojo);
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-3px);
+        }
+
+        /* ====== NUESTRA COMUNIDAD ====== */
+        #comunidad {
+            background: linear-gradient(180deg, rgba(245,240,232,0.5) 0%, rgba(232,224,208,0.7) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--unl-negro) 0%, var(--unl-verde) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-desc {
+            color: #4a4a4a;
+            max-width: 600px;
+            font-size: 1.1rem;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .community-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--unl-verde);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .community-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--unl-rojo);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            border-bottom: 3px solid var(--unl-verde);
+        }
+
+        .community-card:hover .card-image {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--unl-negro);
+        }
+
+        .card-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .card-text strong {
+            color: var(--unl-rojo);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--unl-rojo) 0%, var(--unl-verde) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #4a4a4a;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ====== BIBLIOTECA ====== */
+        #biblioteca {
+            background: linear-gradient(180deg, rgba(232,224,208,0.7) 0%, rgba(245,240,232,0.5) 100%);
+        }
+
+        .library-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--unl-verde);
+            border-radius: 50px;
+            padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--unl-rojo);
+            box-shadow: 0 0 20px rgba(191, 8, 17, 0.2);
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--unl-negro);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #888;
+        }
+
+        .search-bar button {
+            background: linear-gradient(135deg, var(--unl-rojo) 0%, #8B0000 100%);
+            border: none;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            transform: scale(1.05);
+        }
+
+        /* ====== PRIMER CUENTO DESTACADO ====== */
+        .featured-book {
+            margin-bottom: 2.5rem;
+        }
+
+        .featured-book .book-card {
+            display: flex;
+            flex-direction: row;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 3px solid var(--unl-verde);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .featured-book .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+            border-color: var(--unl-rojo);
+        }
+
+        .featured-book .book-cover {
+            width: 280px;
+            min-width: 280px;
+            height: 320px;
+            background: linear-gradient(135deg, var(--unl-verde) 0%, var(--unl-verde-oliva) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-book .book-cover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        .featured-book .book-info {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .featured-book .book-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--unl-negro);
+        }
+
+        .featured-book .book-author {
+            color: var(--unl-rojo);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .featured-book .book-rating {
+            display: flex;
+            gap: 0.2rem;
+            margin-bottom: 1rem;
+            color: var(--unl-dorado);
+            font-size: 1.2rem;
+        }
+
+        .featured-book .book-desc {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--unl-rojo) 0%, #8B0000 100%);
+            color: #fff;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        /* ====== GRID DE CUENTOS RESTANTES ====== */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid var(--unl-verde);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--unl-rojo);
+        }
+
+        .book-cover {
+            height: 200px;
+            background: linear-gradient(135deg, var(--unl-verde) 0%, var(--unl-verde-oliva) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .book-info {
+            padding: 1.8rem;
+        }
+
+        .book-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--unl-negro);
+        }
+
+        .book-author {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .book-rating {
+            display: flex;
+            gap: 0.2rem;
+            margin-top: 0.8rem;
+            color: var(--unl-dorado);
+        }
+
+        /* ====== JUEGOS ====== */
+        #juegos {
+            background: linear-gradient(180deg, rgba(245,240,232,0.5) 0%, rgba(232,224,208,0.7) 100%);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--unl-verde);
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--unl-rojo);
+        }
+
+        .game-banner {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .game-banner.alt1 { background: linear-gradient(135deg, var(--unl-rojo) 0%, #8B0000 100%); }
+        .game-banner.alt2 { background: linear-gradient(135deg, var(--unl-verde) 0%, var(--unl-verde-oliva) 100%); }
+        .game-banner.alt3 { background: linear-gradient(135deg, var(--unl-azul) 0%, #0066AA 100%); }
+        .game-banner.alt4 { background: linear-gradient(135deg, var(--unl-dorado) 0%, #E8C84A 100%); }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--unl-negro);
+        }
+
+        .game-desc {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-tag {
+            background: rgba(72, 142, 58, 0.15);
+            color: var(--unl-verde);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .game-players {
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: var(--unl-verde);
+            border-top: 3px solid var(--unl-rojo);
+            padding: 3rem;
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--unl-dorado);
+        }
+
+        /* ====== ANIMATIONS ====== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .institutional-header {
+                padding: 0.6rem 1rem;
+            }
+
+            .header-title {
+                font-size: 0.9rem;
+            }
+
+            .header-subtitle {
+                font-size: 0.6rem;
+            }
+
+            .header-logo, .header-logo-right {
+                height: 35px;
+            }
+
+            .navbar {
+                top: 65px;
+                padding: 0.5rem 1.5rem;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 65px;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(191, 8, 17, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.4s ease;
+                backdrop-filter: blur(20px);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-row {
+                gap: 2rem;
+            }
+
+            section {
+                padding: 12rem 1.5rem 3rem;
+            }
+
+            .community-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Featured book responsive */
+            .featured-book .book-card {
+                flex-direction: column;
+            }
+
+            .featured-book .book-cover {
+                width: 100%;
+                min-width: auto;
+                height: 220px;
+                font-size: 4rem;
+            }
+
+            .featured-book .book-info {
+                padding: 1.5rem;
+            }
+
+            .featured-book .book-title {
+                font-size: 1.3rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--unl-fondo);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--unl-verde);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--unl-rojo);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Encabezado Institucional -->
+    <header class="institutional-header">
+        <div class="header-content">
+            <div class="header-left">
+                <img src="Img/LOGO.png" alt="Logo UNL" class="header-logo">
+            </div>
+            <div class="header-center">
+                <div class="header-title">Cuentos de Nuestra Comunidad</div>
+                <div class="header-subtitle">Carrera de Pedagogía de las Ciencias Experimentales Informática</div>
+            </div>
+            <div class="header-right">
+                <img src="Img/logoinstitucion.png" alt="Logo Marianas" class="header-logo">
+            </div>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#inicio" class="active">Inicio</a></li>
+            <li><a href="#comunidad">Nuestra Comunidad</a></li>
+            <li><a href="#biblioteca">Biblioteca</a></li>
+            <li><a href="#juegos">Juegos</a></li>
+        </ul>
+        <div class="mobile-toggle" id="mobile-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Inicio -->
+    <section id="inicio">
+        <h1 class="hero-title">Bienvenidos, Conoce de Nuestra Comunidad</h1>
+        <p class="hero-subtitle">
+            Conecta, aprende y diviértete con nuestra comunidad.
+        </p>
+        <div class="cta-buttons">
+            <a href="#comunidad" class="btn btn-primary">Únete Ahora</a>
+            <a href="#biblioteca" class="btn btn-secondary">Explorar</a>
+        </div>
+    </section>
+
+    <!-- Nuestra Comunidad -->
+    <section id="comunidad">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Nuestra Comunidad</h2>
+            <p class="section-desc">
+                Descubre la riqueza cultural, histórica y natural de Pujilí, por su riqueza cultural, agrícola y artesanal.
+            </p>
+        </div>
+        <div class="community-grid">
+            <!-- Card 1: San Buenaventura de Pujilí, Latacunga, Ecuador -->
+            <div class="community-card fade-in">
+                <img src="img/ubicacion.jpg" alt="Ciudad de Pujilí" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">San Buenaventura de Pujilí, Latacunga, Ecuador</h3>
+                    <p class="card-text">
+                       Pujilí conocida como <strong>"San Buenaventura de Pujilí"</strong>, es un cantón de la provincia de Cotopaxi, ubicado a unos 10 km al oeste de Latacunga. Se asienta en un amplio valle andino, al pie del monte Sinchahuasín, a una altitud aproximada de 2.961 metros sobre el nivel del mar. Su estratégica ubicación lo convierte en un paso obligado entre la Sierra y la Costa, a través de la vía Latacunga-La ManáBabahoyo. Fundado como cantón el <strong>14 de octubre de 1852</strong>, Pujilí es reconocido por su riqueza cultural, agrícola y artesanal.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2: Símbolos del Cantón Pujilí -->
+            <div class="community-card fade-in">
+                <img src="img/simbolo del canton.png" alt="Símbolos del Cantón Pujilí" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Símbolos del Cantón Pujilí</h3>
+                    <p class="card-text">
+                        El escudo de Pujilí,<strong> adoptado oficialmente el 28 de mayo de 1945 </strong>, refleja la identidad y el legado de su gente. Está dividido en tres compartimientos con los colores de la bandera nacional: amarillo, azul y rojo. En la parte superior destaca una vasija de barro, símbolo de la alfarería pujilense. En los compartimientos inferiores se representan el cuarzo y la caliza, minerales abundantes en la región. Un libro abierto en la base simboliza el avance cultural. Dos espigas doradas escoltan el escudo, representando la riqueza agrícola. Finalmente, una cinta azul celeste con la inscripción <strong>“14 de Octubre de 1852”</strong> conmemora la fecha de cantonización. 
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3: Turismo de Pujilí -->
+            <div class="community-card fade-in">
+                <img src="img/Turismo Pujili.png" alt="Turismo en Pujilí" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Turismo de Pujilí</h3>
+                    <p class="card-text">
+                        Pujilí es un destino cultural y natural que ofrece experiencias únicas. Entre sus principales atractivos están... <strong>La Laguna de Quilotoa, La Victoria, Guangaje, Zumbahua, Angamarca, Pilaló y El Tingo La Esperanza.</strong>Además, Pujilí destaca por su gastronomía tradicional como las<strong> morcillas, uctotortillas y el mishque.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="stats-row fade-in">
+            <div class="stat-item">
+                <div class="stat-number" data-target="1000">0</div>
+                <div class="stat-label">Miembros de la Comunidad</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="4">0</div>
+                <div class="stat-label">Recursos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="5">0</div>
+                <div class="stat-label">Juegos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="88">0</div>
+                <div class="stat-label">% Satisfacción</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biblioteca -->
+    <section id="biblioteca">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Biblioteca</h2>
+            <p class="section-desc">
+                Descubre nuestra colección de cuentos educativos para aprender de forma divertida.
+            </p>
+        </div>
+        <div class="library-container">
+            
+
+            <!-- Primer cuento destacado (solo, ancho completo) -->
+            <div  class="featured-book fade-in"><a href="cuento1.html">
+
+                <div class="book-card">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <span class="featured-badge">⭐ Pujilí</span>
+                        <div class="book-title">El Cóndor y la Montaña</div>
+                        <div class="book-author">Monica Yupangui</div>
+                        <div class="book-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="book-desc">
+                        "Cuando un pueblo protege lo sagrado, ni el más fuerte puede encerrar la libertad."</p>
+                        <p class="book-desc">
+                        "Shuk ayllu wakakta harkakpika, mana maypi kallpayujpipas mana atishka kishpikta wichkana"</p>
+                    </div>
+                </div></a>
+            </div>
+
+            <!-- Grid de cuentos restantes (2 por fila) -->
+                <div  class="featured-book fade-in">
+            <div><a href="cuento2.html"></div>
+                <div class="book-card">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">El Puente del Payaso</div>
+                        <div class="book-author">Verónica Guerrero</div>
+                        <div class="book-rating">⭐⭐⭐⭐</div>
+                        <p class="book-desc">
+                        Nunca burles la vida, nunca tomes mas de lo que puedas soporta… y jamás subestimes el silencio de la noche en Tumbaco.</p>
+                    </div>
+                </div></a>
+            </div>
+            <div  class="featured-book fade-in">
+            <div><a href="cuento3.html"></div>
+                <div class="book-card">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">El Niño Misterioso</div>
+                        <div class="book-author">Silvana Castellano</div>
+                        <div class="book-rating">⭐⭐⭐</div>
+                            <p class="book-desc">
+                            La naturaleza en hermosa y valiosa, pero también requiere de nuestra prudencia y respeto para mantener una armonía segura y saludable para todos </p>
+                    </div>
+                </div></a>
+            </div>
+            <div  class="featured-book fade-in">
+            <div><a href="cuento4.html"></div>
+                <div class="book-card">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">El Camino de los Ahorcados</div>
+                        <div class="book-author">Juan Ortega</div>
+                        <div class="book-rating">⭐⭐⭐⭐⭐⭐</div>
+                        <p class="book-desc">
+                        Según la leyenda en que se basa esta narración, las almas de los dos infortunados amantes estaban "penando", es decir, no podían descansar en paz porque se habían ido de este mundo sin esperar el llamado de Dios.
+                        </p>
+                    </div>
+                </div></a>
+            </div>
+            <div  class="featured-book fade-in">
+            <div><a href="cuento5.html"></div>
+                <div class="book-card">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">El Caballero de las Espuelas de Oro</div>
+                        <div class="book-author">Daniela Andrade</div>
+                        <div class="book-rating">⭐⭐⭐⭐</div>
+                    </div>
+                </div></a>
+            </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Juegos -->
+    <section id="juegos">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Juegos</h2>
+            <p class="section-desc">
+                Diviértete y compite con amigos en nuestra selección de juegos interactivos y desafiantes.
+            </p>
+        </div>
+        <div class="games-grid">
+            <div class="game-card fade-in">
+                <div class="game-banner">
+                    🧠
+                    <div class="play-overlay">
+                        <div><a href="Juego1.html" class="play-btn">▶</a></div>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Preguntas Desafiantes</h3>
+                    <div class="game-meta">
+                    <span class="game-players">El Cóndor y la Montaña</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="game-card fade-in">
+                <div class="game-banner alt1">
+                    🏆
+                    <div class="play-overlay">
+                    <a href="https://es.educaplay.com/recursos-educativos/29334134-el_guardian_de_las_montanas.html " class="play-btn">▶</a>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Froggy Jumps </h3>
+                    <p class="game-desc">El Guardián de las Montañas .</p>
+                    <div class="game-meta">
+                        <span class="game-players">El Cóndor y la Montaña</span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card fade-in">
+                <div class="game-banner alt2">
+                    🎲
+                    <div class="play-overlay">
+                        <a href="https://es.educaplay.com/recursos-educativos/29332381-cuento_en_versos_el_condor_y_la_montana_blanks.html "class="play-btn">▶</a>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Completar Frases </h3>
+                    <p class="game-desc">(BLanks)</p>
+                    <div class="game-meta">
+                        <span class="game-players">El Cóndor y la Montaña </span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card fade-in">
+                <div class="game-banner alt3">
+                    ⚡
+                    <div class="play-overlay">
+                        <a href="https://es.educaplay.com/recursos-educativos/29332324-el_condor_y_las_montanas.html "class="play-btn">▶</a>                    </div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Crucigrama </h3>
+                    <div class="game-meta">
+                        <span class="game-players">El Cóndor y las Montañas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card fade-in">
+                <div class="game-banner alt4">
+                    🧩
+                    <div class="play-overlay">
+                        <a href="https://es.educaplay.com/recursos-educativos/15691759-teorias_del_aprendizaje.html "class="play-btn">▶</a>                    </div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Sopa de letras </h3>
+                    <div class="game-meta">
+                        <span class="game-players">El Cóndor y las Montañas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Universidad Nacional de Loja. Todos los derechos reservados.</p>
+        <p>Construido con ❤️ para nuestra comunidad</p>
+        <div class="social-links">
+            <a href="#">📧</a>
+            <a href="#">💬</a>
+            <a href="#">🐦</a>
+            <a href="#">📸</a>
+        </div>
+        <p>Autor</p>
+        <p>Monica Yupangui</p>
+    </footer>
+
+    <script>
+        // ====== PARTICLES ======
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(214, 51, 132, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(100, Math.floor(canvas.width * canvas.height / 15000));
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(214, 51, 132, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ====== NAVBAR SCROLL ======
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ====== MOBILE TOGGLE ======
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // ====== SMOOTH SCROLL & ACTIVE LINK ======
+        const links = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                mobileToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ====== FADE IN ON SCROLL ======
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+
+        // ====== COUNTER ANIMATION ======
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 60;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            entry.target.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            entry.target.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(num => counterObserver.observe(num));
+
+        // ====== SEARCH FUNCTION ======
+        function searchBooks() {
+            const input = document.getElementById('search-input');
+            const query = input.value.toLowerCase();
+            const books = document.querySelectorAll('.book-card');
+
+            books.forEach(book => {
+                const title = book.querySelector('.book-title').textContent.toLowerCase();
+                const author = book.querySelector('.book-author').textContent.toLowerCase();
+
+                if (title.includes(query) || author.includes(query)) {
+                    book.style.display = 'block';
+                    book.style.animation = 'fadeInUp 0.5s ease';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        }
+
+        document.getElementById('search-input').addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') searchBooks();
+        });
+
+        // ====== COMMUNITY CARD CLICK ======
+        document.querySelectorAll('.community-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
